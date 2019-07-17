@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/single-post/styles.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/single-post/responsive.css')}}">
     <style>
-        .header-bg{
-            height: 500px;
-            width: 100%;
-            background-image: url({{asset('storage/post/'.$post->image)}});
-            background-size: cover;
-        }
-        .favorite-posts{
-            color:deeppink;
-        }
+        {{--.header-bg{--}}
+        {{--    height: 500px;--}}
+        {{--    width: 100%;--}}
+        {{--    background-image: url({{asset('storage/post/'.$post->image)}});--}}
+        {{--    background-size: cover;--}}
+        {{--}--}}
+        {{--.favorite-posts{--}}
+        {{--    color:deeppink;--}}
+        {{--}--}}
     </style>
 @endpush
 @section('content')
@@ -28,7 +28,9 @@
                         <div class="blog-post-inner">
                             <div class="post-info">
                                 <div class="left-area">
-                                    <a class="avatar" href="{{route('author.profile', $post->user->username)}}"><img src="{{asset('storage/profile/'.$post->user->image)}}" alt="Profile Image"></a>
+                                    <a class="avatar" href="{{route('author.profile', $post->user->username)}}"><img
+                                            src="{{asset('storage/profile/'.$post->user->image)}}" alt="Profile Image">
+                                    </a>
                                 </div>
                                 <div class="middle-area">
                                     <a class="name" href="#"><b>{{$post->user->name}}</b></a>
@@ -37,6 +39,8 @@
                             </div><!-- post-info -->
                             <h3 class="title"><span><b>{{$post->title}}</b></span></h3>
                             <div class="para">
+                                <img src="{{asset('storage/post/'.$post->image)}}" alt="">
+                                <hr>
                                 {!! html_entity_decode($post->body) !!}
                             </div>
                             <ul class="tags">
@@ -79,7 +83,7 @@
                                 <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
                             </ul>
                             <ul class="icons">
-                                <li>SHARE : </li>
+                                <li>SHARE :</li>
                                 <li><a href="#"><i class="ion-social-facebook"></i></a></li>
                                 <li><a href="#"><i class="ion-social-twitter"></i></a></li>
                                 <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
@@ -155,8 +159,9 @@
                                 <div class="row">
                                     <div class="col-sm-12">
 									<textarea name="comment" rows="2" class="text-area-messge form-control"
-                                        placeholder="Enter your comment" aria-required="true" aria-invalid="false">
-                                    </textarea >
+                                              placeholder="Enter your comment" aria-required="true"
+                                              aria-invalid="false">
+                                    </textarea>
                                     </div><!-- col-sm-12 -->
                                     <div class="col-sm-12">
                                         <button class="submit-btn" type="submit" id="form-submit">
@@ -176,7 +181,9 @@
                                 <div class="comment">
                                     <div class="post-info">
                                         <div class="left-area">
-                                            <a class="avatar" href="#"><img src="{{asset('storage/profile/'.$comment->user->image)}}" alt="Profile Image"></a>
+                                            <a class="avatar" href="#"><img
+                                                    src="{{asset('storage/profile/'.$comment->user->image)}}"
+                                                    alt="Profile Image"></a>
                                         </div>
                                         <div class="middle-area">
                                             <a class="name" href="#"><b>{{$comment->user->name}}</b></a>
@@ -211,7 +218,8 @@
                                 <div class="blog-image"><img src="{{asset('storage/post/'.$randompost->image)}}"
                                                              alt="{{$randompost->title}}"></div>
                                 <a class="avatar" href="{{route('author.profile', $post->user->username)}}">
-                                    <img src="{{asset('storage/profile/'.$randompost->user->image)}}" alt="{{$randompost->title}}"></a>
+                                    <img src="{{asset('storage/profile/'.$randompost->user->image)}}"
+                                         alt="{{$randompost->title}}"></a>
                                 <div class="blog-info">
                                     <h4 class="title"><a href="{{route('details.post', $randompost->slug)}}"><b>
                                                 {{$randompost->title}}</b></a></h4>
@@ -232,12 +240,14 @@
                                                     <i class="ion-heart"></i>{{$randompost->favorite_to_users->count()}}
                                                 </a>
                                                 <form id="favorite-form-{{$randompost->id}}" style="display: none;"
-                                                      action="{{route('post.favorite', $randompost->id)}}" method="POST">
+                                                      action="{{route('post.favorite', $randompost->id)}}"
+                                                      method="POST">
                                                     @csrf
                                                 </form>
                                             @endguest
                                         </li>
-                                        <li><a href="#"><i class="ion-chatbubble"></i>{{$post->comments()->count()}}</a></li>
+                                        <li><a href="#"><i class="ion-chatbubble"></i>{{$post->comments()->count()}}</a>
+                                        </li>
                                         <li><a href="#"><i class="ion-eye"></i>{{$randompost->view_count}}</a></li>
                                     </ul>
                                 </div><!-- blog-info -->
