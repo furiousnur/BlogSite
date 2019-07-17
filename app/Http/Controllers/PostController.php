@@ -36,6 +36,11 @@ class PostController extends Controller
         return view('category-posts', compact('category', 'posts'));
     }
 
+    public function categories(){
+        $categories = Category::latest()->get();
+        return view('all-category', compact('categories'));
+    }
+
     public function tag($slug){
         $tag = Tag::where('slug', $slug)->first();
         $posts = $tag->posts()->approved()->status()->get();

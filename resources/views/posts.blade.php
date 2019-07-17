@@ -12,7 +12,7 @@
 @section('content')
     <div class="slider display-table center-text">
         <h1 class="title display-table-cell"><b>All Posts</b></h1>
-    </div><!-- slider -->
+    </div>
     <section class="blog-area section">
         <div class="container">
             <div class="row">

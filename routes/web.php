@@ -18,6 +18,7 @@
     Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');
     Route::get('/posts', 'PostController@index')->name('posts.index');
     Route::get('/category/{slug}', 'PostController@category')->name('category.posts');
+    Route::get('/all-category', 'PostController@categories')->name('categories.posts');
     Route::get('/tag/{slug}', 'PostController@tag')->name('tag.posts');
     Route::get('/search', 'SearchController@search')->name('search');
     Route::get('/profile/{username}/', 'AuthorController@profile')->name('author.profile');
