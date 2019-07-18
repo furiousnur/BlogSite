@@ -7,10 +7,11 @@
         .favorite-posts {
             color: deeppink;
         }
-        .slider{
+
+        .slider {
             height: 500px;
             width: 100%;
-            background-image: url({{asset('storage/category/'.$category->image)}});
+            background-image: url({{asset('storage/category/featured/'.$category->fimage)}});
             background-size: cover;
         }
     </style>
@@ -28,7 +29,7 @@
                             <div class="card h-100">
                                 <div class="single-post post-style-1">
                                     <div class="blog-image">
-                                        <img src="{{asset('storage/post/'.$post->image)}}"alt="{{$post->title}}">
+                                        <img src="{{asset('storage/post/'.$post->image)}}" alt="{{$post->title}}">
                                     </div>
                                     <a class="avatar" href="{{route('author.profile', $post->user->username)}}">
                                         <img src="{{asset('storage/profile/'.$post->user->image)}}"
