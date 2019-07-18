@@ -42,9 +42,10 @@ class CategoryController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|unique:categories',
-            'image' => 'required|mimes:jpeg,bmp,png,jpg'
+            'image' => 'required|mimes:jpeg,bmp,png,jpg',
+            'f_image' => 'required|mimes:jpeg,bmp,png,jpg'
         ]);
-        // get form image
+        // get form logo image
         $image = $request->file('image');
         $slug = str_slug($request->name);
         if (isset($image))
@@ -52,30 +53,44 @@ class CategoryController extends Controller
 //          make unique name for image
             $currentDate = Carbon::now()->toDateString();
             $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-//            check category dir is exists
+//
+            // check category slider dir is exists
             if (!Storage::disk('public')->exists('category'))
             {
                 Storage::disk('public')->makeDirectory('category');
             }
-//            resize image for category and upload
-            $category = Image::make($image)->resize(1600,479)->stream();
-            Storage::disk('public')->put('category/'.$imagename,$category);
-            //            check category slider dir is exists
-            if (!Storage::disk('public')->exists('category/slider'))
-            {
-                Storage::disk('public')->makeDirectory('category/slider');
-            }
             //            resize image for category slider and upload
             $slider = Image::make($image)->resize(500,333)->stream();
-            Storage::disk('public')->put('category/slider/'.$imagename,$slider);
+            Storage::disk('public')->put('category/'.$imagename,$slider);
         } else {
             $imagename = "default.png";
+        }
+
+        //featured image
+        $fimage = $request->file('f_image');
+        $slug = str_slug($request->name);
+        if (isset($fimage))
+        {
+//          make unique name for image
+            $currentDate = Carbon::now()->toDateString();
+            $fimagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$fimage->getClientOriginalExtension();
+//            check category dir is exists
+            if (!Storage::disk('public')->exists('category/featured'))
+            {
+                Storage::disk('public')->makeDirectory('category/featured');
+            }
+//            resize image for category and upload
+            $category = Image::make($fimage)->resize(1600,479)->stream();
+            Storage::disk('public')->put('category/featured/'.$fimagename,$category);
+        } else {
+            $fimagename = "default.png";
         }
 
         $category = new Category();
         $category->name = $request->name;
         $category->slug = $slug;
         $category->image = $imagename;
+        $category->fimage = $fimagename;
         $category->save();
         Toastr::success('Category Successfully Saved :)' ,'Success');
         return redirect()->route('admin.category.index');

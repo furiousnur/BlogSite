@@ -25,7 +25,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="form-control">Logo Image</label>
                                 <input type="file" name="image">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control">Featured Image</label>
+                                <input type="file" name="f_image">
                             </div>
                             <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.category.index')}}">BACK</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
